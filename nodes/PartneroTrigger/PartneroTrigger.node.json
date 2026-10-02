@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-partnero.partneroTrigger",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Marketing", "Sales"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://docs.partnero.com/api-reference/introduction"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://docs.partnero.com/api-reference/webhooks/introduction"
+			}
+		]
+	}
+}

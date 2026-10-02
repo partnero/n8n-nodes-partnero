@@ -1,0 +1,58 @@
+{
+	"name": "n8n-nodes-partnero",
+	"version": "0.1.0",
+	"description": "n8n node for Partnero — manage partners, customers, transactions and leads in your affiliate or referral program, and trigger workflows on program events",
+	"license": "MIT",
+	"homepage": "https://www.partnero.com",
+	"keywords": [
+		"n8n-community-node-package",
+		"partnero",
+		"affiliate",
+		"referral",
+		"partners"
+	],
+	"author": {
+		"name": "Partnero",
+		"email": "hello@partnero.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/partnero/n8n-nodes-partnero.git"
+	},
+	"bugs": {
+		"url": "https://github.com/partnero/n8n-nodes-partnero/issues"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [
+			"dist/credentials/PartneroApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/Partnero/Partnero.node.js",
+			"dist/nodes/PartneroTrigger/PartneroTrigger.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "^0.50.4",
+		"eslint": "9.32.0",
+		"prettier": "3.6.2",
+		"release-it": "^21.1.0",
+		"typescript": "5.9.2"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}
