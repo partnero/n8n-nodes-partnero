@@ -1,7 +1,7 @@
 {
 	"name": "n8n-nodes-partnero",
 	"version": "0.1.0",
-	"description": "n8n node for Partnero — manage partners, customers, transactions and leads in your affiliate or referral program, and trigger workflows on program events",
+	"description": "n8n node for Partnero — manage partners, customers, transactions, leads and payouts in your affiliate or referral program, and trigger workflows on program events",
 	"license": "MIT",
 	"homepage": "https://www.partnero.com",
 	"keywords": [

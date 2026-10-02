@@ -2,6 +2,7 @@ import { NodeConnectionTypes, type INodeType, type INodeTypeDescription } from '
 import { customerDescription } from './resources/customer';
 import { leadDescription } from './resources/lead';
 import { partnerDescription } from './resources/partner';
+import { payoutRequestDescription } from './resources/payoutRequest';
 import { transactionDescription } from './resources/transaction';
 
 export class Partnero implements INodeType {
@@ -12,7 +13,8 @@ export class Partnero implements INodeType {
 		group: ['input'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Manage partners, customers, transactions, leads and rewards in Partnero',
+		description:
+			'Manage partners, customers, transactions, leads and payouts in Partnero',
 		defaults: {
 			name: 'Partnero',
 		},
@@ -52,6 +54,10 @@ export class Partnero implements INodeType {
 						value: 'partner',
 					},
 					{
+						name: 'Payout Request',
+						value: 'payoutRequest',
+					},
+					{
 						name: 'Transaction',
 						value: 'transaction',
 					},
@@ -61,6 +67,7 @@ export class Partnero implements INodeType {
 			...customerDescription,
 			...leadDescription,
 			...partnerDescription,
+			...payoutRequestDescription,
 			...transactionDescription,
 		],
 	};

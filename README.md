@@ -4,7 +4,8 @@ An [n8n](https://n8n.io) community node for [Partnero](https://www.partnero.com)
 affiliate and referral program platform.
 
 Use it to create referred customers, record sales so commission is calculated, manage
-partners and leads, and start workflows the moment something happens in your program.
+partners, leads and payouts, and start workflows the moment something happens in your
+program.
 
 The package ships two nodes: **Partnero** for actions, and **Partnero Trigger** for
 reacting to webhook events.
@@ -96,6 +97,31 @@ there.
 | Get Many | List leads in the program |
 | Delete | Permanently delete a lead |
 
+### Payout Request
+
+| Operation | Description |
+| --- | --- |
+| Create | Raise a payout for a partner without waiting for them to ask |
+| Get | Fetch one payout request with its status and amount |
+| Get Many | List payout requests in the program |
+| Search | Find payout requests by partner, status or currency |
+| Approve | Approve a payout a partner has requested |
+| Mark as Paid | Record that you have sent the money, which closes the payout |
+
+A payout covers a partner's whole unpaid balance in one currency, so there is no amount to
+set — only the currency. A partner holding both USD and EUR needs one payout per currency.
+
+Partnero needs payout details before it can create the request. Normally the partner saves
+them in their portal and you leave **Payout Method** on *Automatic*. If they have not, pick
+a method and fill in the details yourself. Bank transfers are the exception: those details
+can only be saved by the partner, not sent through the API.
+
+Approve and Mark as Paid both only apply at one point in a payout's life — a payout must be
+awaiting a decision to be approved, and approved to be marked as paid. Calling them out of
+order fails with a message naming the status that blocked it, so an `If` on
+`{{ $json.status }}` is worth putting in front of them. Neither moves any money; Mark as
+Paid records that you paid the partner by whatever means you actually used.
+
 ## Trigger
 
 **Partnero Trigger** registers a webhook in your program when the workflow is activated
@@ -184,6 +210,14 @@ the partner earns commission on what the deal was actually worth.
 **Welcome new partners.** Partnero Trigger on `partner.created` → your email tool, using
 the referral link from the event payload so the partner gets everything they need in the
 first message.
+
+**Approve payouts under a threshold and queue the rest.** Schedule Trigger → Partnero →
+Payout Request → Search with *Status* set to *Requested* → If (amount under the figure you
+are happy to approve unreviewed) → Partnero → Payout Request → Approve on the true branch,
+your Slack or email node on the false branch so a person looks at the larger ones.
+
+Approving does not pay anybody. Once you have actually sent the money, call Mark as Paid to
+close the payout and clear the partner's balance.
 
 ## Resources
 
